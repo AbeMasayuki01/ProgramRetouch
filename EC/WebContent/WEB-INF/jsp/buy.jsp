@@ -45,7 +45,7 @@
 												<div class="input-field col s8 offset-s2 ">
 													<select name="delivery_method_id">
 														<c:forEach var="dmdb" items="${dmdbList}" >
-															<option value="${dmdb.id}">${dmdb.name}</option>
+															<option value="${dmdb.id}">${dmdb.name}${dmdb.price}円</option>
 														</c:forEach>
 													</select> <label>配送方法</label>
 												</div>

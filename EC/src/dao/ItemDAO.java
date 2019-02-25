@@ -79,7 +79,7 @@ public class ItemDAO {
 			if (rs.next()) {
 				item.setId(rs.getInt("id"));
 				item.setName(rs.getString("name"));
-				item.setDetail(rs.getString("name"));
+				item.setDetail(rs.getString("detail"));
 				item.setPrice(rs.getInt("price"));
 				item.setFileName(rs.getString("file_name"));
 			}
@@ -114,13 +114,17 @@ public class ItemDAO {
 
 			if (searchWord.length() == 0) {
 				// 全検索
+				//LIMITは問い合せ結果で取得する行数を制限するときに使用します。 このとき、取得する開始位置を
+				//OFFSET（オフセット）といい、問い合せ結果の先頭から（0 からカウント）の位置付けを指定します。
+				//なお、LIMIT 句と WHERE 句を一緒に指定した場合には、WHERE 句が優先されます。
 				st = con.prepareStatement("SELECT * FROM m_item ORDER BY id ASC LIMIT ?,? ");
 				st.setInt(1, startiItemNum);
 				st.setInt(2, pageMaxItemCount);
 			} else {
 				// 商品名検索
-				st = con.prepareStatement("SELECT * FROM m_item WHERE name = ?  ORDER BY id ASC LIMIT ?,? ");
-				st.setString(1,searchWord);
+				//st = con.prepareStatement("SELECT * FROM m_item WHERE name = ?  ORDER BY id ASC LIMIT ?,? ");
+				st = con.prepareStatement("SELECT * FROM m_item WHERE name LIKE ?  ORDER BY id ASC LIMIT ?,? ");
+				st.setString(1, "%" + searchWord + "%");
 				st.setInt(2, startiItemNum);
 				st.setInt(3, pageMaxItemCount);
 			}

@@ -69,6 +69,7 @@ public class DeliveryMethodDAO {
 					"SELECT * FROM m_delivery_method WHERE id = ?");
 			st.setInt(1, DeliveryMethodId);
 
+
 			ResultSet rs = st.executeQuery();
 
 			DeliveryMethodDataBeans dmdb = new DeliveryMethodDataBeans();
